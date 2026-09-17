@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aprajita AI Assistant</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'chatbot/css/style.css' %}">
+</head>
+
+<body>
+
+    {% csrf_token %}
+
+    <div class="chat-app">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ✨
+                </div>
+
+                <div>
+                    <h2>Aprajita AI</h2>
+                    <span>Student Assistant</span>
+                </div>
+
+            </div>
+
+
+            <!-- Profile -->
+
+            <div class="profile-card">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div class="profile-info">
+                    <h3>Aprajita</h3>
+                    <p>B.Tech 1st Year</p>
+                </div>
+
+                <div class="online-dot"></div>
+
+            </div>
+
+
+            <!-- Academic Info -->
+
+            <div class="section-title">
+                ACADEMIC PROFILE
+            </div>
+
+            <div class="info-card">
+
+                <div class="info-row">
+                    <span>🎓</span>
+                    <div>
+                        <small>Course</small>
+                        <strong>B.Tech</strong>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span>📚</span>
+                    <div>
+                        <small>Year</small>
+                        <strong>1st Year</strong>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span>👥</span>
+                    <div>
+                        <small>Batch</small>
+                        <strong>G2</strong>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span>🏫</span>
+                    <div>
+                        <small>University</small>
+                        <strong>IIMT University</strong>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span>📍</span>
+                    <div>
+                        <small>Campus</small>
+                        <strong>Greater Noida</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Topics -->
+
+            <div class="section-title">
+                EXPLORE TOPICS
+            </div>
+
+            <div class="topic-list">
+
+                <button onclick="sendSuggestion('what is python')">
+                    <span>🐍</span>
+                    Python
+                </button>
+
+                <button onclick="sendSuggestion('what is ai')">
+                    <span>🤖</span>
+                    Artificial Intelligence
+                </button>
+
+                <button onclick="sendSuggestion('what is machine learning')">
+                    <span>🧠</span>
+                    Machine Learning
+                </button>
+
+                <button onclick="sendSuggestion('what is django')">
+                    <span>🌐</span>
+                    Django
+                </button>
+
+                <button onclick="sendSuggestion('what is data science')">
+                    <span>📊</span>
+                    Data Science
+                </button>
+
+                <button onclick="sendSuggestion('what is programming')">
+                    <span>💻</span>
+                    Programming
+                </button>
+
+            </div>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="status-card">
+
+                    <span class="status-icon">⚡</span>
+
+                    <div>
+                        <strong>Learning Mode</strong>
+                        <small>Ready to help you</small>
+                    </div>
+
+                    <span class="status-light"></span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CHAT ================= -->
+
+        <main class="chat-container">
+
+
+            <!-- Header -->
+
+            <header class="chat-header">
+
+                <div class="bot-profile">
+
+                    <div class="bot-avatar">
+
+                        <div class="bot-face">
+                            ✨
+                        </div>
+
+                        <span class="avatar-status"></span>
+
+                    </div>
+
+                    <div class="bot-details">
+
+                        <h1>Aprajita</h1>
+
+                        <p>
+                            <span class="live-dot"></span>
+                            AI Student Assistant
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <button
+                        class="header-btn"
+                        onclick="clearChat()"
+                        title="Clear conversation">
+                        🗑️
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- Chat Area -->
+
+            <div id="chat-box" class="chat-box">
+
+
+                <!-- Welcome -->
+
+                <div class="welcome-section">
+
+                    <div class="welcome-avatar">
+                        ✨
+                    </div>
+
+                    <div class="welcome-text">
+
+                        <span class="welcome-label">
+                            WELCOME 👋
+                        </span>
+
+                        <h2>
+                            Hi, I'm Aprajita
+                        </h2>
+
+                        <p>
+                            Your friendly student learning assistant.
+                            Ask me anything about programming, AI,
+                            Machine Learning, Python, Django and more.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Initial Bot Message -->
+
+                <div class="message-row bot-row">
+
+                    <div class="message-avatar">
+                        ✨
+                    </div>
+
+                    <div class="message-content">
+
+                        <div class="message-name">
+                            Aprajita
+                        </div>
+
+                        <div class="bot-message">
+
+                            Hello 👋 I'm Aprajita!
+
+                            <br><br>
+
+                            I can help you understand
+                            <strong>Python</strong>,
+                            <strong>AI</strong>,
+                            <strong>Machine Learning</strong>,
+                            <strong>Django</strong>,
+                            <strong>Data Science</strong>
+                            and other basic computer science topics.
+
+                            <br><br>
+
+                            Choose a question below or type your own question 😊
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Suggested Questions -->
+
+                <div class="suggestions-container">
+
+                    <div class="suggestion-heading">
+
+                        <span>💡</span>
+
+                        <div>
+                            <strong>Start a conversation</strong>
+                            <small>Choose a question to get started</small>
+                        </div>
+
+                    </div>
+
+
+                    <div id="question-options" class="question-options">
+
+                        <button onclick="sendSuggestion('what is python')">
+                            <span class="suggestion-icon python-icon">🐍</span>
+
+                            <div>
+                                <strong>What is Python?</strong>
+                                <small>Learn Python basics</small>
+                            </div>
+
+                            <span class="arrow">→</span>
+                        </button>
+
+
+                        <button onclick="sendSuggestion('what is ai')">
+                            <span class="suggestion-icon ai-icon">🤖</span>
+
+                            <div>
+                                <strong>What is AI?</strong>
+                                <small>Understand Artificial Intelligence</small>
+                            </div>
+
+                            <span class="arrow">→</span>
+                        </button>
+
+
+                        <button onclick="sendSuggestion('what is machine learning')">
+                            <span class="suggestion-icon ml-icon">🧠</span>
+
+                            <div>
+                                <strong>What is Machine Learning?</strong>
+                                <small>Start your ML journey</small>
+                            </div>
+
+                            <span class="arrow">→</span>
+                        </button>
+
+
+                        <button onclick="sendSuggestion('what is django')">
+                            <span class="suggestion-icon django-icon">🌐</span>
+
+                            <div>
+                                <strong>What is Django?</strong>
+                                <small>Learn web development</small>
+                            </div>
+
+                            <span class="arrow">→</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Input Area -->
+
+            <div class="input-section">
+
+                <div class="input-container">
+
+                    <button
+                        class="input-icon"
+                        title="Suggestions"
+                        onclick="focusInput()">
+                        ✨
+                    </button>
+
+                    <input
+                        type="text"
+                        id="user-input"
+                        placeholder="Ask Aprajita anything..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        class="send-button"
+                        onclick="sendMessage()"
+                        title="Send message">
+
+                        <span>➤</span>
+
+                    </button>
+
+                </div>
+
+                <div class="input-hint">
+                    Press <kbd>Enter</kbd> to send
+                </div>
+
+            </div>
+
+
+            <!-- Footer -->
+
+            <footer class="chat-footer">
+
+                <span>✨ Aprajita AI Student Assistant</span>
+
+                <span>•</span>
+
+                <span>Built for learning</span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="{% static 'chatbot/js/script.js' %}"></script>
+
+</body>
+
+</html>
